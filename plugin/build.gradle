@@ -1,6 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 group = 'io.github.Anth3995.guardian'
@@ -42,8 +43,15 @@ testing {
 }
 
 gradlePlugin {
+    website = 'https://github.com/Anth3995/CodeGuardian'
+    vcsUrl = 'https://github.com/Anth3995/CodeGuardian'
+
     plugins {
         guardian {
+            displayName = 'CodeGuardian'
+            description = 'This Gradle plugin is an aggregator that configures Error Prone and CheckStyle, aiming to reduce boilerplate code and ensure consistent quality across projects. It automatically applies Git hooks to run tests and builds before each push, enhancing code reliability and development workflow.'
+            tags = ['code', 'errorprone', 'codeStyle', 'style', 'checkstyle', 'quality']
+
             id = 'io.github.Anth3995.guardian'
             implementationClass = 'io.github.Anth3995.guardian.GuardianPlugin'
         }

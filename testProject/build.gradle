@@ -1,0 +1,8 @@
+plugins {
+    id('io.github.Anth3995.guardian')
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}

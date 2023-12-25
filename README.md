@@ -8,12 +8,14 @@ CodeGuardian is a Java-based project focusing on improving code quality and secu
 
 - **Git Hooks** on Push: Implements Git hooks that activate on 'push' operations, ensuring run gradle test and gradle build before git push
 
-      git stash -q --keep-index
-      ./gradlew test
-      ./gradlew clean build -x test
-      status=$?
-      git stash pop -q
-      exit $status
+```bash
+git stash -q --keep-index
+./gradlew test
+./gradlew clean build -x test
+status=$?
+git stash pop -q
+exit $status
+```
 
 - **Checkstyle** Preconfigured: Comes with a preconfigured Checkstyle setup, a tool for enforcing coding standards and styles in Java code.
    This ensures consistency and adherence to best coding practices across the project. By default it use google style code with additional checks. It's guardian code style.

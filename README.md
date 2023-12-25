@@ -31,7 +31,9 @@ exit $status
 ### Installation and Usage
 
 ```gradle
-id 'io.github.Anth3995.guardian' version '1.0.0'
+plugins {
+    id 'io.github.Anth3995.guardian' version '1.0.0'
+}
 ```
 
 ## Configuration (gradle DLS) (it shows default configuration)

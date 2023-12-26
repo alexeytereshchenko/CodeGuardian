@@ -11,6 +11,7 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.file.DuplicatesStrategy;
 import org.gradle.api.plugins.quality.Checkstyle;
 import org.gradle.api.plugins.quality.CheckstyleExtension;
 import org.gradle.api.tasks.Copy;
@@ -211,22 +212,25 @@ public class GuardianPlugin implements Plugin<Project> {
       return;
     }
 
-    String destDir = ".git/hooks";
+    String destDir = project.getRootProject().getRootDir().getAbsolutePath() + ".git/hooks";
     project.getTasks().register(TaskName.COPY_GIT_HOOKS, Copy.class, copyTask -> {
       copyTask.setGroup("help");
       copyTask.setDescription("Add pre-push script, which will try build a gradle project  before push to repository");
 
       URL prePushHookUrl = getClass().getClassLoader().getResource("git-hooks/pre-push.sh");
       if (prePushHookUrl != null) {
-        copyTask.from(project.getResources().getText().fromUri(prePushHookUrl));
+        String fileName = new File(prePushHookUrl.getFile()).getName();
+        copyTask.from(project.getResources().getText().fromUri(prePushHookUrl), copySpec -> {
+          copySpec.rename(uriName -> fileName);
+          copySpec.setFileMode(Integer.valueOf("777", 8)); // https://github.com/gradle/gradle/issues/21171
+        });
       }
 
+      copyTask.setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE);
       copyTask.into(destDir);
-      copyTask.setFileMode(777);
     });
 
     Task copyGitHooksTask = project.getTasks().findByName(TaskName.COPY_GIT_HOOKS);
-
     project.getTasks().named("build").configure(buildTask ->
         buildTask.dependsOn(copyGitHooksTask)
     );

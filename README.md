@@ -67,6 +67,10 @@ guardian {
 
 Contributions are welcome.
 
+## It's board of project
+
+Trello [project board](https://trello.com/b/h9S0f27p/guardian)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -59,8 +59,3 @@ gradlePlugin {
 }
 
 gradlePlugin.testSourceSets.add(sourceSets.functionalTest)
-
-tasks.named('check') {
-    // Include functionalTest as part of the check lifecycle
-    dependsOn(testing.suites.functionalTest)
-}

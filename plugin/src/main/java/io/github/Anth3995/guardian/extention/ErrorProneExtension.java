@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ErrorProneExtension {
-  private boolean enable;
+  private boolean enable = true;
   private String dependency = "com.google.errorprone:error_prone_core:2.23.0";
   private String dependencyJavac = "com.google.errorprone:javac:9+181-r4173-1";
 
@@ -26,7 +26,6 @@ public class ErrorProneExtension {
     bugPatterns.add("MultipleTopLevelClasses");
     bugPatterns.add("MissingBraces");
     bugPatterns.add("UnnecessaryStaticImport");
-    bugPatterns.add("JavaTimeDefaultTimeZone");
     bugPatterns.add("BadImport");
     bugPatterns.add("MixedArrayDimensions");
     bugPatterns.add("FieldCanBeLocal");
@@ -63,7 +62,6 @@ public class ErrorProneExtension {
     bugPatterns.add("DuplicateDateFormatField");
     bugPatterns.add("EmptyCatch");
     bugPatterns.add("EmptyTopLevelDeclaration");
-    bugPatterns.add("EqualsGetClass");
     bugPatterns.add("EqualsIncompatibleType");
     bugPatterns.add("EqualsUnsafeCast");
     bugPatterns.add("EqualsUsingHashCode");

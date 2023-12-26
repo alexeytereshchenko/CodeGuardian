@@ -6,7 +6,7 @@ import org.gradle.api.plugins.ExtensionAware;
 public abstract class GuardianExtension implements ExtensionAware {
   private final ErrorProneExtension errorProne = new ErrorProneExtension();
   private final GuardianCheckStyleExtension checkStyle = new GuardianCheckStyleExtension();
-  private boolean enableGitHooks;
+  private boolean enableGitHooks = true;
 
   public boolean isEnableGitHooks() {
     return enableGitHooks;

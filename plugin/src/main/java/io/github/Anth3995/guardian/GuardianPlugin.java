@@ -211,14 +211,18 @@ public class GuardianPlugin implements Plugin<Project> {
       return;
     }
 
+    String destDir = ".git/hooks";
     project.getTasks().register(TaskName.COPY_GIT_HOOKS, Copy.class, copyTask -> {
+      copyTask.setGroup("help");
+      copyTask.setDescription("Add pre-push script, which will try build a gradle project  before push to repository");
+
       URL prePushHookUrl = getClass().getClassLoader().getResource("git-hooks/pre-push.sh");
       if (prePushHookUrl != null) {
         copyTask.from(project.getResources().getText().fromUri(prePushHookUrl));
       }
 
-      copyTask.into("../.git/hooks/pre-push");
-      copyTask.setFileMode(0775);
+      copyTask.into(destDir);
+      copyTask.setFileMode(777);
     });
 
     Task copyGitHooksTask = project.getTasks().findByName(TaskName.COPY_GIT_HOOKS);
@@ -226,5 +230,9 @@ public class GuardianPlugin implements Plugin<Project> {
     project.getTasks().named("build").configure(buildTask ->
         buildTask.dependsOn(copyGitHooksTask)
     );
+
+    project.getTasks().withType(Delete.class, cleanTask -> {
+      cleanTask.delete(project.getLayout().getProjectDirectory().file(destDir));
+    });
   }
 }

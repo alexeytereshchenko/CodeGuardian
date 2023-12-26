@@ -45,12 +45,12 @@ guardian {
     enable = true // Enables or disables ErrorProne.
     dependency = 'com.google.errorprone:error_prone_core:2.23.0' // Specifies the dependency (errorprone) for ErrorProne
     dependencyJavac = 'com.google.errorprone:javac:9+181-r4173-1' // Specifies the dependency (errorproneJavac) for ErrorProne javac.
-    bugPatterns = [] // // A list to specify custom bug patterns for ErrorProne to detect.
+    bugPatterns = [] // A list to specify custom bug patterns for ErrorProne to detect. See link below to view default patters
   } 
 
   checkStyle {
     enable = true // Enables or disables CheckStyle.
-    fileUrl = null // URL to a custom CheckStyle configuration file (from S3 for example); the default is using [link]
+    fileUrl = null // URL to a custom CheckStyle configuration file (from S3 for example). See link below to view default
     errorThreshold = 0 // Threshold for the number of errors to tolerate before failing the build.
     showViolations = true // Whether to display the details of style violations.
     version = '10.12.6' // Specifies the version of CheckStyle to use.
@@ -59,7 +59,7 @@ guardian {
 
 ```
 
-bugPatterns = [link](https://github.com/Anth3995/CodeGuardian/blob/35d0f125ec5b8dc1a9e36ad9b7f3f2923180de6d/plugin/src/main/java/io/github/Anth3995/guardian/extention/ErrorProneExtension.java#L13-L139)
+[bugPatterns](https://github.com/Anth3995/CodeGuardian/blob/35d0f125ec5b8dc1a9e36ad9b7f3f2923180de6d/plugin/src/main/java/io/github/Anth3995/guardian/extention/ErrorProneExtension.java#L13-L139)
 
 [default checkStyle](https://github.com/Anth3995/CodeGuardian/blob/master/plugin/src/main/resources/guardian-checkstyle.xml)
 

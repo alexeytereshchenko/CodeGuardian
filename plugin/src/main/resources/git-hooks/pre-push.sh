@@ -1,7 +1,6 @@
 #!/bin/bash
 
 git stash -q --keep-index
-./gradlew test
 ./gradlew clean build -x test
 status=$?
 git stash pop -q

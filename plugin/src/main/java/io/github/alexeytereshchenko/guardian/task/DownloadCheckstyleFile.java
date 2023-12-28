@@ -1,4 +1,4 @@
-package io.github.Anth3995.guardian.task;
+package io.github.alexeytereshchenko.guardian.task;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.InvalidUserDataException;

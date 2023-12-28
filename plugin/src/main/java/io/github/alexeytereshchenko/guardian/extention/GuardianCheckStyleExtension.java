@@ -1,4 +1,4 @@
-package io.github.Anth3995.guardian.extention;
+package io.github.alexeytereshchenko.guardian.extention;
 
 public class GuardianCheckStyleExtension {
   private boolean enable = true;

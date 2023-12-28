@@ -1,4 +1,4 @@
-package io.github.Anth3995.guardian.meta;
+package io.github.alexeytereshchenko.guardian.meta;
 
 public final class TaskName {
 

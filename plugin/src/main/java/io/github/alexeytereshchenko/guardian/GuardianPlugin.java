@@ -1,5 +1,9 @@
-package io.github.Anth3995.guardian;
+package io.github.alexeytereshchenko.guardian;
 
+import io.github.alexeytereshchenko.guardian.extention.ErrorProneExtension;
+import io.github.alexeytereshchenko.guardian.extention.GuardianCheckStyleExtension;
+import io.github.alexeytereshchenko.guardian.extention.GuardianExtension;
+import io.github.alexeytereshchenko.guardian.meta.TaskName;
 import net.ltgt.gradle.errorprone.CheckSeverity;
 import net.ltgt.gradle.errorprone.ErrorProneCompilerArgumentProvider;
 import net.ltgt.gradle.errorprone.ErrorProneOptions;
@@ -23,11 +27,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Set;
 
-import io.github.Anth3995.guardian.extention.ErrorProneExtension;
-import io.github.Anth3995.guardian.extention.GuardianCheckStyleExtension;
-import io.github.Anth3995.guardian.extention.GuardianExtension;
-import io.github.Anth3995.guardian.meta.TaskName;
-import io.github.Anth3995.guardian.task.DownloadCheckstyleFile;
+import io.github.alexeytereshchenko.guardian.task.DownloadCheckstyleFile;
 
 public class GuardianPlugin implements Plugin<Project> {
   @Override

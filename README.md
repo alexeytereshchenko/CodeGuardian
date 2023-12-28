@@ -32,7 +32,7 @@ exit $status
 
 ```gradle
 plugins {
-    id 'io.github.Anth3995.guardian' version '1.1.2'
+    id 'io.github.alexeytereshchenko.guardian' version '1.1.2'
 }
 ```
 
@@ -59,9 +59,9 @@ guardian {
 
 ```
 
-[bugPatterns](https://github.com/Anth3995/CodeGuardian/blob/35d0f125ec5b8dc1a9e36ad9b7f3f2923180de6d/plugin/src/main/java/io/github/Anth3995/guardian/extention/ErrorProneExtension.java#L13-L139)
+[bugPatterns](https://github.com/alexeytereshchenko/CodeGuardian/blob/d27833940934fe3fd59b02cff0f792aeb8982625/plugin/src/main/java/io/github/oleksiitereshchenko/guardian/extention/ErrorProneExtension.java#L14-L137)
 
-[default checkStyle](https://github.com/Anth3995/CodeGuardian/blob/master/plugin/src/main/resources/guardian-checkstyle.xml)
+[default checkStyle](plugin/src/main/resources/guardian-checkstyle.xml)
 
 ## Contributing
 
@@ -77,4 +77,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-CodeGuardian © 2023 by Anth3995
+CodeGuardian © 2023 by Alexey Tereshchenko

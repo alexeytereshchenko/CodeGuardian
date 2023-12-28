@@ -1,4 +1,4 @@
-package io.github.Anth3995.guardian.extention;
+package io.github.alexeytereshchenko.guardian.extention;
 
 import org.gradle.api.Action;
 import org.gradle.api.plugins.ExtensionAware;

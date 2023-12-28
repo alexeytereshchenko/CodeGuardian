@@ -10,7 +10,6 @@ CodeGuardian is a Java-based project focusing on improving code quality and secu
 
 ```bash
 git stash -q --keep-index
-./gradlew test
 ./gradlew clean build -x test
 status=$?
 git stash pop -q

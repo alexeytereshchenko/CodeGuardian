@@ -1,4 +1,4 @@
-package io.github.Anth3995.guardian.extention;
+package io.github.alexeytereshchenko.guardian.extention;
 
 import java.util.HashSet;
 import java.util.Set;

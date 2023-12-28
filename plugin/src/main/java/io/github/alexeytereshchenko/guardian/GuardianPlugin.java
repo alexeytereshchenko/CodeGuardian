@@ -1,9 +1,17 @@
-package io.github.Anth3995.guardian;
+package io.github.alexeytereshchenko.guardian;
 
+import io.github.alexeytereshchenko.guardian.extention.ErrorProneExtension;
+import io.github.alexeytereshchenko.guardian.extention.GuardianCheckStyleExtension;
+import io.github.alexeytereshchenko.guardian.extention.GuardianExtension;
+import io.github.alexeytereshchenko.guardian.meta.TaskName;
+import io.github.alexeytereshchenko.guardian.task.DownloadCheckstyleFile;
+import java.io.File;
+import java.net.URL;
+import java.util.List;
+import java.util.Set;
 import net.ltgt.gradle.errorprone.CheckSeverity;
 import net.ltgt.gradle.errorprone.ErrorProneCompilerArgumentProvider;
 import net.ltgt.gradle.errorprone.ErrorProneOptions;
-
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -17,17 +25,6 @@ import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.language.base.internal.plugins.CleanRule;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-import java.net.URL;
-import java.util.List;
-import java.util.Set;
-
-import io.github.Anth3995.guardian.extention.ErrorProneExtension;
-import io.github.Anth3995.guardian.extention.GuardianCheckStyleExtension;
-import io.github.Anth3995.guardian.extention.GuardianExtension;
-import io.github.Anth3995.guardian.meta.TaskName;
-import io.github.Anth3995.guardian.task.DownloadCheckstyleFile;
 
 public class GuardianPlugin implements Plugin<Project> {
   @Override

@@ -4,8 +4,8 @@ plugins {
     id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
-group = 'io.github.Anth3995.guardian'
-version = '1.1.2'
+group = 'io.github.alexeytereshchenko.guardian'
+version = '1.2.0'
 
 dependencies {
     implementation 'net.ltgt.errorprone:net.ltgt.errorprone.gradle.plugin:3.0.1'
@@ -43,8 +43,8 @@ testing {
 }
 
 gradlePlugin {
-    website = 'https://github.com/Anth3995/CodeGuardian'
-    vcsUrl = 'https://github.com/Anth3995/CodeGuardian'
+    website = 'https://github.com/alexeytereshchenko/CodeGuardian'
+    vcsUrl = 'https://github.com/alexeytereshchenko/CodeGuardian'
 
     plugins {
         guardian {
@@ -52,8 +52,8 @@ gradlePlugin {
             description = 'This Gradle plugin is an aggregator that configures Error Prone and CheckStyle, aiming to reduce boilerplate code and ensure consistent quality across projects. It automatically applies Git hooks to run tests and builds before each push, enhancing code reliability and development workflow.'
             tags = ['code', 'errorprone', 'codeStyle', 'style', 'checkstyle', 'quality']
 
-            id = 'io.github.Anth3995.guardian'
-            implementationClass = 'io.github.Anth3995.guardian.GuardianPlugin'
+            id = 'io.github.alexeytereshchenko.guardian'
+            implementationClass = 'io.github.alexeytereshchenko.guardian.GuardianPlugin'
         }
     }
 }

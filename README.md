@@ -24,8 +24,8 @@ exit $status
 
 ### Prerequisites
 
-- Java JDK 17+
-- Gradle 5.0+
+- Java JDK 11+
+- Gradle 7.0+
 
 ### Installation and Usage
 

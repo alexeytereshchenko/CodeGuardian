@@ -24,8 +24,8 @@ exit $status
 
 ### Prerequisites
 
-- Java JDK (version 11 or newer)
-- Gradle for build automation
+- Java JDK 17+
+- Gradle 5.0+
 
 ### Installation and Usage
 

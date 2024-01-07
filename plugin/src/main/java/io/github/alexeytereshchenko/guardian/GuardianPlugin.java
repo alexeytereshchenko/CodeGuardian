@@ -234,7 +234,7 @@ public class GuardianPlugin implements Plugin<Project> {
     );
 
     project.getTasks().withType(Delete.class, cleanTask -> {
-      cleanTask.delete(project.getLayout().getProjectDirectory().file("%s/%s".formatted(destDir, fileName)));
+      cleanTask.delete(project.getLayout().getProjectDirectory().file(String.format("%s/%s", destDir, fileName)));
     });
   }
 }

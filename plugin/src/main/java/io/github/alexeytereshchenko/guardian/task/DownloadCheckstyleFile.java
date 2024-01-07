@@ -1,14 +1,5 @@
 package io.github.alexeytereshchenko.guardian.task;
 
-import org.gradle.api.DefaultTask;
-import org.gradle.api.InvalidUserDataException;
-import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.Optional;
-import org.gradle.api.tasks.TaskAction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,6 +10,14 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import org.gradle.api.DefaultTask;
+import org.gradle.api.InvalidUserDataException;
+import org.gradle.api.provider.Property;
+import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Optional;
+import org.gradle.api.tasks.TaskAction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class DownloadCheckstyleFile extends DefaultTask {
 
@@ -66,7 +65,7 @@ public abstract class DownloadCheckstyleFile extends DefaultTask {
       }
 
     } catch (Exception e) {
-      String message = "Cannot download a checkstyle file by url: %s in %s".formatted(url, destinationPath);
+      String message = String.format("Cannot download a checkstyle file by url: %s in %s", url, destinationPath);
       log.error(message, e);
       throw e;
     }

@@ -31,7 +31,7 @@ exit $status
 
 ```gradle
 plugins {
-    id 'io.github.alexeytereshchenko.guardian' version '1.2.0'
+    id 'io.github.alexeytereshchenko.guardian' version '1.2.1'
 }
 ```
 

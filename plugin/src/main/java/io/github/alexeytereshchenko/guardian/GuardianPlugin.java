@@ -4,10 +4,14 @@ import io.github.alexeytereshchenko.guardian.extention.ErrorProneExtension;
 import io.github.alexeytereshchenko.guardian.extention.GuardianCheckStyleExtension;
 import io.github.alexeytereshchenko.guardian.extention.GuardianExtension;
 import io.github.alexeytereshchenko.guardian.meta.TaskName;
+import io.github.alexeytereshchenko.guardian.task.DownloadCheckstyleFile;
+import java.io.File;
+import java.net.URL;
+import java.util.List;
+import java.util.Set;
 import net.ltgt.gradle.errorprone.CheckSeverity;
 import net.ltgt.gradle.errorprone.ErrorProneCompilerArgumentProvider;
 import net.ltgt.gradle.errorprone.ErrorProneOptions;
-
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -22,13 +26,6 @@ import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.language.base.internal.plugins.CleanRule;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.net.URL;
-import java.util.List;
-import java.util.Set;
-
-import io.github.alexeytereshchenko.guardian.task.DownloadCheckstyleFile;
-
 public class GuardianPlugin implements Plugin<Project> {
   @Override
   public void apply(@NotNull Project project) {
@@ -40,8 +37,12 @@ public class GuardianPlugin implements Plugin<Project> {
 
       configurePlugins(evaluatedProject);
       configureDependencies(evaluatedProject, guardianExtension);
-      configureErrorProne(evaluatedProject, guardianExtension);
       configureGitHooks(evaluatedProject, guardianExtension);
+
+      boolean enableErrorProne = guardianExtension.getErrorProne().isEnable();
+      if (enableErrorProne) {
+        configureErrorProne(evaluatedProject, guardianExtension);
+      }
 
       boolean enableChecker = guardianExtension.getCheckStyle().isEnable();
       if (enableChecker) {
@@ -94,7 +95,11 @@ public class GuardianPlugin implements Plugin<Project> {
     });
   }
 
-  private void configureDownloadConfigFileProperties(DownloadCheckstyleFile task, GuardianExtension guardianExtension, String filePath) {
+  private void configureDownloadConfigFileProperties(
+      DownloadCheckstyleFile task,
+      GuardianExtension guardianExtension,
+      String filePath
+  ) {
     GuardianCheckStyleExtension checkStyleExtension = guardianExtension.getCheckStyle();
     String checkstyleFileUrl = checkStyleExtension.getFileUrl();
 
@@ -170,7 +175,7 @@ public class GuardianPlugin implements Plugin<Project> {
   }
 
   private String getCustomCheckStyleFilePath(Project project) {
-    return project.getProjectDir().getPath() + "/config/checkstyle/checkstyle.xml";
+    return project.getRootProject().getRootDir().getAbsolutePath() + "/config/checkstyle/checkstyle.xml";
   }
 
   private void configureErrorProne(Project project, GuardianExtension guardianExtension) {
@@ -188,12 +193,13 @@ public class GuardianPlugin implements Plugin<Project> {
     });
   }
 
-  private void configureErrorProneOptions(ErrorProneOptions options,
-                                          GuardianExtension guardianExtension) {
+  private void configureErrorProneOptions(
+      ErrorProneOptions options,
+      GuardianExtension guardianExtension
+  ) {
     ErrorProneExtension errorProne = guardianExtension.getErrorProne();
-    boolean enableErrorProne = errorProne.isEnable();
 
-    options.getEnabled().convention(enableErrorProne);
+    options.getEnabled().convention(true);
     options.getDisableAllWarnings().convention(true);
     options.getDisableWarningsInGeneratedCode().convention(true);
     options.getExcludedPaths().convention(".*/build/generated/.*");

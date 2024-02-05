@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class ErrorProneExtension {
   private boolean enable = true;
-  private String dependency = "com.google.errorprone:error_prone_core:2.23.0";
+  private String dependency = "com.google.errorprone:error_prone_core:2.24.1";
   private String dependencyJavac = "com.google.errorprone:javac:9+181-r4173-1";
 
   private Set<String> bugPatterns = new HashSet<>();

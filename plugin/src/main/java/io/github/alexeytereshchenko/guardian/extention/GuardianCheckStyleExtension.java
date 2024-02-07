@@ -6,6 +6,15 @@ public class GuardianCheckStyleExtension {
   private int errorThreshold = 0;
   private boolean showViolations = true;
   private String version = "10.12.6";
+  private boolean includeTest = false;
+
+  public boolean isIncludeTest() {
+    return includeTest;
+  }
+
+  public void setIncludeTest(boolean includeTest) {
+    this.includeTest = includeTest;
+  }
 
   public String getVersion() {
     return version;

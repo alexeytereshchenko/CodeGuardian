@@ -31,7 +31,7 @@ exit $status
 
 ```gradle
 plugins {
-    id 'io.github.alexeytereshchenko.guardian' version '1.2.2'
+    id 'io.github.alexeytereshchenko.guardian' version '1.2.3'
 }
 ```
 
@@ -45,6 +45,7 @@ guardian {
     dependency = 'com.google.errorprone:error_prone_core:2.23.0' // Specifies the dependency (errorprone) for ErrorProne
     dependencyJavac = 'com.google.errorprone:javac:9+181-r4173-1' // Specifies the dependency (errorproneJavac) for ErrorProne javac.
     bugPatterns = [] // A list to specify custom bug patterns for ErrorProne to detect. See link below to view default patters
+    includeTest = false // add test sourceSet to checkstyle
   } 
 
   checkStyle {

@@ -7,7 +7,7 @@ import io.github.alexeytereshchenko.guardian.meta.TaskName;
 import io.github.alexeytereshchenko.guardian.task.DownloadCheckstyleFile;
 import java.io.File;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import net.ltgt.gradle.errorprone.CheckSeverity;
 import net.ltgt.gradle.errorprone.ErrorProneCompilerArgumentProvider;
@@ -21,6 +21,7 @@ import org.gradle.api.plugins.quality.Checkstyle;
 import org.gradle.api.plugins.quality.CheckstyleExtension;
 import org.gradle.api.tasks.Copy;
 import org.gradle.api.tasks.Delete;
+import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.SourceSetContainer;
 import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.language.base.internal.plugins.CleanRule;
@@ -126,29 +127,13 @@ public class GuardianPlugin implements Plugin<Project> {
   }
 
   private void configureCheckstyle(Project project, GuardianExtension guardianExtension) {
-    GuardianCheckStyleExtension checkStyleExtension = guardianExtension.getCheckStyle();
-    String fileUrl = checkStyleExtension.getFileUrl();
-    String filePath = fileUrl == null ? getGuardianCheckStyleFilePath(project) : getCustomCheckStyleFilePath(project);
-
-    int errorThreshold = checkStyleExtension.getErrorThreshold();
-    boolean showViolations = checkStyleExtension.isShowViolations();
-    String version = checkStyleExtension.getVersion();
+    GuardianCheckStyleExtension guardianCheckStyleExtension = guardianExtension.getCheckStyle();
 
     CheckstyleExtension checkstyleExtension = project.getExtensions()
         .findByType(CheckstyleExtension.class);
 
     if (checkstyleExtension != null) {
-      checkstyleExtension.setToolVersion(version);
-      checkstyleExtension.setMaxErrors(errorThreshold);
-      checkstyleExtension.setShowViolations(showViolations);
-      checkstyleExtension.setMaxWarnings(0);
-      checkstyleExtension.setIgnoreFailures(false);
-      checkstyleExtension.setConfigFile(new File(filePath));
-
-      SourceSetContainer sourceSets = (SourceSetContainer) project.getProperties()
-          .get("sourceSets");
-      checkstyleExtension.setSourceSets(
-          List.of(sourceSets.getByName("main"), sourceSets.getByName("test")));
+      configureCheckStyleExtension(project, checkstyleExtension, guardianCheckStyleExtension);
     }
 
     // it's bug in a checkstyle plugin https://github.com/gradle/gradle/issues/27035#issuecomment-1814589243
@@ -163,6 +148,36 @@ public class GuardianPlugin implements Plugin<Project> {
         reports.getHtml().getRequired().convention(true);
       });
     });
+  }
+
+  private void configureCheckStyleExtension(
+      Project project,
+      CheckstyleExtension checkstyleExtension,
+      GuardianCheckStyleExtension guardianCheckStyleExtension
+  ) {
+    String fileUrl = guardianCheckStyleExtension.getFileUrl();
+    String filePath = fileUrl == null ? getGuardianCheckStyleFilePath(project) : getCustomCheckStyleFilePath(project);
+
+    int errorThreshold = guardianCheckStyleExtension.getErrorThreshold();
+    boolean showViolations = guardianCheckStyleExtension.isShowViolations();
+    String version = guardianCheckStyleExtension.getVersion();
+    boolean includeTest = guardianCheckStyleExtension.isIncludeTest();
+
+    checkstyleExtension.setToolVersion(version);
+    checkstyleExtension.setMaxErrors(errorThreshold);
+    checkstyleExtension.setShowViolations(showViolations);
+    checkstyleExtension.setMaxWarnings(0);
+    checkstyleExtension.setIgnoreFailures(false);
+    checkstyleExtension.setConfigFile(new File(filePath));
+
+    SourceSetContainer sourceSetContainer = (SourceSetContainer) project.getProperties().get("sourceSets");
+    ArrayList<SourceSet> sourceSets = new ArrayList<>();
+    sourceSets.add(sourceSetContainer.getByName("main"));
+    if (includeTest) {
+      sourceSets.add(sourceSetContainer.getByName("test"));
+    }
+
+    checkstyleExtension.setSourceSets(sourceSets);
   }
 
   private String getGuardianCheckStyleFilePath(Project project) {

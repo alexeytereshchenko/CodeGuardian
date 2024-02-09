@@ -31,7 +31,7 @@ exit $status
 
 ```gradle
 plugins {
-    id 'io.github.alexeytereshchenko.guardian' version '1.2.2'
+    id 'io.github.alexeytereshchenko.guardian' version '1.2.5'
 }
 ```
 
@@ -53,6 +53,7 @@ guardian {
     errorThreshold = 0 // Threshold for the number of errors to tolerate before failing the build.
     showViolations = true // Whether to display the details of style violations.
     version = '10.12.6' // Specifies the version of CheckStyle to use.
+    includeTest = false // add test sourceSet to checkstyle
   }
 }
 
